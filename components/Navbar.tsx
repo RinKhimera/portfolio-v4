@@ -1,26 +1,24 @@
 "use client"
+
 import useDarkMode from "@/hooks/Darkmode"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { BsMoonStars } from "react-icons/bs"
 import { IoIosArrowDown } from "react-icons/io"
 import { IoSunnyOutline } from "react-icons/io5"
 
-interface Section {
-  about: boolean
-  skills: boolean
-  projects: boolean
-  contact: boolean
-}
-
-const NavBar = ({ about, skills, projects, contact }: Section) => {
+const NavBar = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode()
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleMenu = () => {
     setIsOpen(!isOpen)
   }
+
+  const pathname = usePathname()
+
   return (
     <div className={isDarkMode ? "dark" : ""}>
       <header className="pointer-events-none relative z-50 flex flex-col">
@@ -127,67 +125,63 @@ const NavBar = ({ about, skills, projects, contact }: Section) => {
                       <nav className="pointer-events-auto hidden md:block">
                         <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
                           <li>
-                            <Link href="/about" legacyBehavior>
-                              <a
-                                className={`relative block px-3 py-2 transition ${
-                                  about
-                                    ? "text-pink-600 dark:text-pink-500"
-                                    : "hover:text-pink-600 dark:hover:text-pink-500"
-                                }`}
-                              >
-                                About
-                                {about && (
-                                  <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
-                                )}
-                              </a>
+                            <Link
+                              href="/about"
+                              className={`relative block px-3 py-2 transition ${
+                                pathname === "/about"
+                                  ? "text-pink-600 dark:text-pink-500"
+                                  : "hover:text-pink-600 dark:hover:text-pink-500"
+                              }`}
+                            >
+                              About
+                              {pathname === "/about" && (
+                                <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
+                              )}
                             </Link>
                           </li>
                           <li>
-                            <Link href="/skills" legacyBehavior>
-                              <a
-                                className={`relative block px-3 py-2 transition ${
-                                  skills
-                                    ? "text-pink-600 dark:text-pink-500"
-                                    : "hover:text-pink-600 dark:hover:text-pink-500"
-                                }`}
-                              >
-                                Skills
-                                {skills && (
-                                  <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
-                                )}
-                              </a>
+                            <Link
+                              href="/skills"
+                              className={`relative block px-3 py-2 transition ${
+                                pathname === "/skills"
+                                  ? "text-pink-600 dark:text-pink-500"
+                                  : "hover:text-pink-600 dark:hover:text-pink-500"
+                              }`}
+                            >
+                              Skills
+                              {pathname === "/skills" && (
+                                <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
+                              )}
                             </Link>
                           </li>
                           <li>
-                            <Link href="/projects" legacyBehavior>
-                              <a
-                                className={`relative block px-3 py-2 transition ${
-                                  projects
-                                    ? "text-pink-600 dark:text-pink-500"
-                                    : "hover:text-pink-600 dark:hover:text-pink-500"
-                                }`}
-                              >
-                                Projects
-                                {projects && (
-                                  <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
-                                )}
-                              </a>
+                            <Link
+                              href="/projects"
+                              className={`relative block px-3 py-2 transition ${
+                                pathname === "/projects"
+                                  ? "text-pink-600 dark:text-pink-500"
+                                  : "hover:text-pink-600 dark:hover:text-pink-500"
+                              }`}
+                            >
+                              Projects
+                              {pathname === "/projects" && (
+                                <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
+                              )}
                             </Link>
                           </li>
                           <li>
-                            <Link href="/contact" legacyBehavior>
-                              <a
-                                className={`relative block px-3 py-2 transition ${
-                                  contact
-                                    ? "text-pink-600 dark:text-pink-500"
-                                    : "hover:text-pink-600 dark:hover:text-pink-500"
-                                }`}
-                              >
-                                Contact
-                                {contact && (
-                                  <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
-                                )}
-                              </a>
+                            <Link
+                              href="/contact"
+                              className={`relative block px-3 py-2 transition ${
+                                pathname === "/contact"
+                                  ? "text-pink-600 dark:text-pink-500"
+                                  : "hover:text-pink-600 dark:hover:text-pink-500"
+                              }`}
+                            >
+                              Contact
+                              {pathname === "/contact" && (
+                                <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0"></span>
+                              )}
                             </Link>
                           </li>
                         </ul>

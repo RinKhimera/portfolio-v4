@@ -5,7 +5,7 @@ import { HiOutlineExternalLink } from "react-icons/hi"
 
 const About = () => {
   return (
-    <section className="mt-16 sm:mt-28 sm:px-8">
+    <main className="mt-16 sm:mt-28 sm:px-8">
       <div className="mx-auto max-w-7xl lg:px-8">
         <div className="relative px-4 sm:px-8 lg:px-12">
           <div className="mx-auto max-w-2xl lg:max-w-5xl">
@@ -108,7 +108,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </main>
   )
 }
 
