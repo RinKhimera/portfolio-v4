@@ -1,15 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { createSlice } from "@reduxjs/toolkit"
 
-const useDarkMode = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false)
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-  }
-
-  return [isDarkMode, toggleDarkMode]
+const initialState = {
+  iDarkMode: false,
 }
 
-export default useDarkMode
+const darkModeSlice = createSlice({
+  name: "darkMode",
+  initialState,
+  reducers: {
+    toggleDarkMode: (state) => {
+      state.iDarkMode = !state.iDarkMode
+    },
+  },
+})
+
+export const { toggleDarkMode } = darkModeSlice.actions
+
+export default darkModeSlice.reducer

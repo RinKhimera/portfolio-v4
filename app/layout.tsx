@@ -1,6 +1,9 @@
 import Footer from "@/components/Footer"
 import NavBar from "@/components/Navbar"
+import { Providers } from "@/redux/provider"
+import { RootState } from "@/redux/store"
 import "@/styles/globals.css"
+import { useSelector } from "react-redux"
 
 export const metadata = {
   title:
@@ -15,21 +18,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <div>
-        <div className="flex h-full min-h-screen flex-col bg-zinc-50 dark:bg-black">
-          <div className="fixed inset-0 flex justify-center sm:px-8">
-            <div className="flex w-full max-w-7xl lg:px-8">
-              <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20"></div>
+      <Providers>
+        <div>
+          <div className="flex h-full min-h-screen flex-col bg-zinc-50 dark:bg-black">
+            <div className="fixed inset-0 flex justify-center sm:px-8">
+              <div className="flex w-full max-w-7xl lg:px-8">
+                <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20"></div>
+              </div>
             </div>
-          </div>
-
-          <div>
             <NavBar />
             {children}
             <Footer />
           </div>
         </div>
-      </div>
+      </Providers>
     </html>
   )
 }

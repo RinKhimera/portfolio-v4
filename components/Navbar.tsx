@@ -1,6 +1,7 @@
 "use client"
 
-import useDarkMode from "@/hooks/Darkmode"
+import { toggleDarkMode } from "@/hooks/Darkmode"
+import { RootState } from "@/redux/store"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -8,9 +9,17 @@ import { useState } from "react"
 import { BsMoonStars } from "react-icons/bs"
 import { IoIosArrowDown } from "react-icons/io"
 import { IoSunnyOutline } from "react-icons/io5"
+import { useDispatch, useSelector } from "react-redux"
 
 const NavBar = () => {
-  const [isDarkMode, toggleDarkMode] = useDarkMode()
+  const darkMode = useSelector((state: RootState) => state.dark.iDarkMode)
+
+  const dispatch = useDispatch()
+
+  const handleToggle = () => {
+    console.log("Button clicked!")
+    dispatch(toggleDarkMode())
+  }
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleMenu = () => {
@@ -20,7 +29,7 @@ const NavBar = () => {
   const pathname = usePathname()
 
   return (
-    <div className={isDarkMode ? "dark" : ""}>
+    <div className={darkMode ? "dark" : ""}>
       <header className="pointer-events-none relative z-50 flex flex-col">
         <div className="top-0 z-10 h-16 pt-6">
           <div className="top-[var(--header-top,theme(spacing.6))] w-full sm:px-8">
@@ -192,10 +201,11 @@ const NavBar = () => {
                         <button
                           type="button"
                           aria-label="Toggle dark mode"
-                          onClick={toggleDarkMode}
+                          onClick={handleToggle}
                           className="group  rounded-full bg-white/90 px-3 py-2 text-pink-400 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition hover:text-pink-600 dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
                         >
-                          {isDarkMode ? (
+                          <BsMoonStars className="m-0.5 text-lg" />
+                          {darkMode ? (
                             <BsMoonStars className="m-0.5 text-lg" />
                           ) : (
                             <IoSunnyOutline className="text-2xl" />
